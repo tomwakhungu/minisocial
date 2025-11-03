@@ -1,50 +1,47 @@
 # MiniSocial - DevOps Practice Project
 
-A full-stack social media application with complete CI/CD pipeline and Kubernetes deployment.
+A full-stack social media application demonstrating modern DevOps practices.
 
 ## Features
 - User authentication
-- Post creation
+- Post creation and sharing
 - Likes and comments
 - Real-time updates
 
 ## Tech Stack
-- **Backend**: Node.js + Express + PostgreSQL
-- **Frontend**: React
-- **Containerization**: Docker
-- **CI/CD**: GitHub Actions
-- **Orchestration**: Kubernetes (kind)
+- **Backend:** Node.js + Express + PostgreSQL
+- **Frontend:** React
+- **Containerization:** Docker
+- **CI/CD:** GitHub Actions
+- **Orchestration:** Kubernetes (kind)
 
 ## Quick Start
 
-### Local Development with Docker Compose
+### Local Development
 ```bash
-docker-compose up --build
+docker-compose up
 ```
 Visit: http://localhost:3000
 
-### Deploy to Kubernetes
+### Kubernetes Deployment
 ```bash
-# Create kind cluster
 kind create cluster --name minisocial-cluster
-
-# Deploy application
 kubectl apply -f k8s/
-
-# Access application
 kubectl port-forward svc/frontend-service 8080:80 -n minisocial
 ```
 Visit: http://localhost:8080
 
+## CI/CD Pipeline
+Every push to `main` branch automatically:
+1. Builds Docker images
+2. Pushes to Docker Hub
+3. Deploys to Kubernetes cluster
+
 ## Project Structure
 ```
 minisocial/
-├── backend/          # Node.js backend
-├── frontend/         # React frontend
+├── backend/          # Node.js API
+├── frontend/         # React app
 ├── k8s/             # Kubernetes manifests
-├── .github/         # GitHub Actions workflows
-└── docker-compose.yml
+└── .github/         # CI/CD workflows
 ```
-
-## License
-MIT
